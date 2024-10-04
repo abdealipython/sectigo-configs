@@ -6,9 +6,8 @@ devices:
     san_domains: [ 'app1.example.com', 'app2.example.com' ]
     key_type: rsa
     key_size: 2048
-    bigip_list: [ <ip or hostname> ]
-    protocol: https
-    username: "admin"
+    bigip_list: 192.168.1.1
+    protocol: https    username: "admin"
     password: "s3cr3t"
     virtualservers:
       - name: vs1
