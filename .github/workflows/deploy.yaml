@@ -3,28 +3,22 @@ name: CI Pipeline
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
-  build:
+  deploy:
     runs-on: self-hosted  # Use the self-hosted runner you set up
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run a script
-        run: echo "Running a deployment script!"
-
-      - name: Check for changes
-        id: check_changes
+      - name: Check and Deploy YAML files
         run: |
-          git config --global user.name "abdealipython"
-          git config --global user.email "abdealipython@gmail.com"
-          git add .
-          git diff --cached --quiet || echo "Changes detected."
+          # Copy all .yaml and .yml files to /etc/sectigo
+          for file in *.yaml *.yml; do
+            if [ -f "$file" ]; then
+              sudo cp "$file" /etc/sectigo/
+              echo "Deployed $file to /etc/sectigo/"
+            fi
+          done
 
-      - name: Commit and push changes
-        if: steps.check_changes.outputs.changes_detected == 'true'
-        run: |
-          git commit -m "Changes"
-          git push origin main
