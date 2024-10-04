@@ -1,16 +1,17 @@
 # full spec: https://docs.sectigo.app/scm/sectigo-connector-for-f5-big-ip/installation-and-configuration.html#_set_up_the_certificate_profile_file
 version: v1
 devices:
-  - name: device1
-    common_name: example.com
+  - name: device123
+    common_name: abd.example.com
     san_domains: [ 'app1.example.com', 'app2.example.com' ]
     key_type: rsa
     key_size: 2048
     bigip_list: 192.168.1.1
-    protocol: https    username: "admin"
+    protocol: https    
+    username: "Admin@123"
     password: "s3cr3t"
     virtualservers:
-      - name: vs1
+      - name: vs3
         port: 443
       - name: vs2
         port: 8443
