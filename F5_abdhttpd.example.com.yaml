@@ -1,0 +1,28 @@
+# templates/f5_config.j2
+
+name: "abdhttpd"
+version: v1
+
+devices:
+  - name: f5_ltm_east_active
+    common_name: "abdhttpd.example.com"
+    san_domains: ["www.abdhttpd.example.com", "api.apachehttpd.example.com"]
+    key_type: rsa
+    key_size: 4096
+    acme_account: "https://acme.ov.com"
+    protocol: https
+    verify_ssl: no
+    bigip_list:
+    	- 192.168.23.155
+    bigip_partition: "UAT"
+    bigip_clientssl_parent: /Common/clientssl
+    use_clientssl: "abdhttpd.example.com__CLIENT-SSL"
+    bigip_unused_profile: xoxoprofile
+    sni: no
+    #expiry_window: 30
+    renew_on_ocsp_fail: no
+    force_renew: no
+    virtualservers:
+      - name: VSAB
+        port: 8443
+
